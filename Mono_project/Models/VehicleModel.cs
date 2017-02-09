@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Mono_project.Models
 {
-    public class VehicleModel
+    public abstract class VehicleModel
     {
         public int Id { get; set; }
         public int MakeId { get; set; }

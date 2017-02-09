@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Mono_project;
+using PagedList;
 
 namespace Mono_project.Controllers
 {
@@ -15,10 +16,22 @@ namespace Mono_project.Controllers
         private VehicleContext db = new VehicleContext();
 
         // GET: VehicleMake
-        public ActionResult Index(string sortOrder, string search)
+        public ActionResult Index(string sortOrder, string search, string currentFilter, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.AbrvSortParm = String.IsNullOrEmpty(sortOrder) ? "abrv_desc" : "";
+
+            if (search != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                search = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = search;
 
             var makers = from s in db.VehicleMake
                          select s;
@@ -41,6 +54,10 @@ namespace Mono_project.Controllers
             {
                 makers = makers.Where(s => s.Name == search || s.Abrv == search); 
             }
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(makers.ToPagedList(pageNumber, pageSize));
 
             return View(makers); 
             return View(db.VehicleMake.ToList());
