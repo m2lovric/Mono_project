@@ -1,14 +1,14 @@
-namespace Mono_project
+namespace Mono_Service
 {
     using System;
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    public partial class VehicleContext : DbContext
+    public partial class ServiceContext : DbContext
     {
-        public VehicleContext()
-            : base("name=VehicleContext")
+        public ServiceContext()
+            : base("name=ServiceContext")
         {
         }
 

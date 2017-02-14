@@ -1,21 +1,27 @@
-﻿@model IEnumerable<Mono_Service.VehicleMake>
+﻿@model IEnumerable<Mono_Service.VehicleModel>
 
 @{
     ViewBag.Title = "Index";
 }
 
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
 @using (Html.BeginForm())
 {
     <p>
         Search : @Html.TextBox("Search")
-        <input type="submit" value="Search" />
+        <input type="submit" value="search" />
     </p>
 }
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
+        <th>
+            @Html.ActionLink("MakeId", "Index", new { sortOrder = ViewBag.MakeIdSortParm })
+        </th>
         <th>
             @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm })
         </th>
@@ -28,6 +34,9 @@
     @foreach (var item in Model)
     {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MakeId)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>

@@ -1,4 +1,4 @@
-namespace Mono_project
+namespace Mono_Service
 {
     using System;
     using System.Collections.Generic;
@@ -6,12 +6,10 @@ namespace Mono_project
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("VehicleModel")]
-    public partial class VehicleModel
+    [Table("VehicleMake")]
+    public partial class VehicleMake
     {
         public int Id { get; set; }
-
-        public int MakeId { get; set; }
 
         [Required]
         [StringLength(50)]

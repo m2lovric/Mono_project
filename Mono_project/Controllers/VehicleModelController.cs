@@ -6,15 +6,15 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Mono_project;
+using Mono_Service;
 
 namespace Mono_project.Controllers
 {
-    public class VehicleModelsController : Controller
+    public class VehicleModelController : Controller
     {
-        private VehicleContext db = new VehicleContext();
+        private ServiceContext db = new ServiceContext();
 
-        // GET: VehicleModels
+        // GET: VehicleModel
         public ActionResult Index(string sortOrder, string search)
         {
             ViewBag.MakeIdSortParm = sortOrder == "makeid" ? "makeid_desc" : "makeid";
@@ -33,7 +33,7 @@ namespace Mono_project.Controllers
                     models = models.OrderByDescending(s => s.MakeId);
                     break;
                 case "name_desc":
-                    models = models.OrderByDescending( s => s.Name);
+                    models = models.OrderByDescending(s => s.Name);
                     break;
                 case "abrv_desc":
                     models = models.OrderByDescending(s => s.Abrv);
@@ -52,7 +52,7 @@ namespace Mono_project.Controllers
             return View(db.VehicleModel.ToList());
         }
 
-        // GET: VehicleModels/Details/5
+        // GET: VehicleModel/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -67,13 +67,13 @@ namespace Mono_project.Controllers
             return View(vehicleModel);
         }
 
-        // GET: VehicleModels/Create
+        // GET: VehicleModel/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: VehicleModels/Create
+        // POST: VehicleModel/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -90,7 +90,7 @@ namespace Mono_project.Controllers
             return View(vehicleModel);
         }
 
-        // GET: VehicleModels/Edit/5
+        // GET: VehicleModel/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -105,7 +105,7 @@ namespace Mono_project.Controllers
             return View(vehicleModel);
         }
 
-        // POST: VehicleModels/Edit/5
+        // POST: VehicleModel/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -121,7 +121,7 @@ namespace Mono_project.Controllers
             return View(vehicleModel);
         }
 
-        // GET: VehicleModels/Delete/5
+        // GET: VehicleModel/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -136,7 +136,7 @@ namespace Mono_project.Controllers
             return View(vehicleModel);
         }
 
-        // POST: VehicleModels/Delete/5
+        // POST: VehicleModel/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

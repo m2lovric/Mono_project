@@ -6,14 +6,14 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Mono_project;
+using Mono_Service;
 using PagedList;
 
 namespace Mono_project.Controllers
 {
     public class VehicleMakeController : Controller
     {
-        private VehicleContext db = new VehicleContext();
+        private ServiceContext db = new ServiceContext();
 
         // GET: VehicleMake
         public ActionResult Index(string sortOrder, string search, string currentFilter, int? page)
@@ -37,7 +37,7 @@ namespace Mono_project.Controllers
                          select s;
 
             switch (sortOrder)
-            {              
+            {
                 case "name_desc":
                     makers = makers.OrderByDescending(s => s.Name);
                     break;
@@ -52,14 +52,14 @@ namespace Mono_project.Controllers
 
             if (!String.IsNullOrEmpty(search))
             {
-                makers = makers.Where(s => s.Name == search || s.Abrv == search); 
+                makers = makers.Where(s => s.Name == search || s.Abrv == search);
             }
 
             int pageSize = 3;
             int pageNumber = (page ?? 1);
             return View(makers.ToPagedList(pageNumber, pageSize));
 
-            return View(makers); 
+            return View(makers);
             return View(db.VehicleMake.ToList());
         }
 
